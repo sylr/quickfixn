@@ -30,7 +30,7 @@ namespace UnitTests
             now = now.AddMilliseconds(heartBtIntMillis);
             Assert.True(SessionState.TimedOut(now, heartBtIntMillis, lastReceivedTime));
         }
-        
+
         [Test]
         public void LogonTimedOut()
         {
@@ -60,8 +60,8 @@ namespace UnitTests
             Assert.False(SessionState.LogoutTimedOut(now, sentLogout, logoutTimeout, lastSentTime));
             now = now.AddMilliseconds(1000);
             Assert.True(SessionState.LogoutTimedOut(now, sentLogout, logoutTimeout, lastSentTime));
-           
-            sentLogout = false; 
+
+            sentLogout = false;
             Assert.False(SessionState.LogoutTimedOut(now, sentLogout, logoutTimeout, lastSentTime));
         }
 
@@ -130,7 +130,8 @@ namespace UnitTests
         }
 
         [Test]
-        public void ThreadSafeSetAndGet() {
+        public void ThreadSafeSetAndGet()
+        {
             //Set up store
             var storeDirectory = Path.Combine(TestContext.CurrentContext.TestDirectory, "store");
 
@@ -152,14 +153,15 @@ namespace UnitTests
             NullLog log = new NullLog();
 
             //Set up sessionstate
-            SessionState state = new SessionState(true, log, 1) {MessageStore = store};
+            SessionState state = new SessionState(true, log, 1) { MessageStore = store };
 
             Hashtable errorsTable = Hashtable.Synchronized(new Hashtable());//used in more than 1 thread at a time
             Hashtable setTable = new Hashtable(1000);//only used in 1 thread at a time
             Hashtable getTable = new Hashtable(1000);//only used in 1 thread at a time
 
             //Synchronously populate 1000 messages
-            for (int i = 1; i < 1000; i++) {
+            for (int i = 1; i < 1000; i++)
+            {
                 string msg = "msg" + i;
                 state.Set(i, msg);
                 setTable[i] = msg;
@@ -167,14 +169,18 @@ namespace UnitTests
 
             //Simulate background sending of messages that populate into the store
             AutoResetEvent setEvent = new AutoResetEvent(false);
-            ThreadPool.QueueUserWorkItem(delegate(object stateObject) {
+            ThreadPool.QueueUserWorkItem(delegate (object stateObject)
+            {
                 AutoResetEvent internalSetEvent = (AutoResetEvent)((object[])stateObject)[0];
                 SessionState internalState = (SessionState)((object[])stateObject)[1];
-                for (int i = 1001; i < 2000; i++) {
-                    try {
+                for (int i = 1001; i < 2000; i++)
+                {
+                    try
+                    {
                         internalState.Set(i, "msg" + i);
                     }
-                    catch (System.IO.IOException ex) {
+                    catch (System.IO.IOException ex)
+                    {
                         errorsTable[ex.Message] = ex;
                     }
                 }
@@ -185,28 +191,34 @@ namespace UnitTests
 
             //Simulate background reading of messages from the store - like is done in a resend request answer
             AutoResetEvent getEvent = new AutoResetEvent(false);
-            ThreadPool.QueueUserWorkItem(delegate(object stateObject){
+            ThreadPool.QueueUserWorkItem(delegate (object stateObject)
+            {
                 AutoResetEvent internalGetEvent = (AutoResetEvent)((object[])stateObject)[0];
                 SessionState internalState = (SessionState)((object[])stateObject)[1];
-                for (int i = 1; i < 1000; i++) {
-                    try {
+                for (int i = 1; i < 1000; i++)
+                {
+                    try
+                    {
                         List<string> lst = new List<string>(1);
                         internalState.Get(i, i, lst);
-                        if (lst.Count == 0) {
+                        if (lst.Count == 0)
+                        {
                             getTable[i] = "nothing read";
                         }
-                        else {
+                        else
+                        {
                             getTable[i] = lst[0];
                         }
                     }
-                    catch (System.IO.IOException ex) {
+                    catch (System.IO.IOException ex)
+                    {
                         errorsTable[ex.Message] = ex;
                     }
                 }
 
                 internalGetEvent.Set();
             }
-            , new object[]{getEvent, state});
+            , new object[] { getEvent, state });
 
             //wait till done and assert results
             Assert.True(setEvent.WaitOne(10000), "Get or Set hung/timed out during concurrent usage");

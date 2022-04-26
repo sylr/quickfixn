@@ -15,7 +15,7 @@ namespace QuickFix
         {
             logIncoming_ = logIncoming;
             logOutgoing_ = logOutgoing;
-            logEvent_    = logEvent;
+            logEvent_ = logEvent;
         }
 
         #region ILog Members
@@ -27,7 +27,7 @@ namespace QuickFix
         {
             if (!logIncoming_)
                 return;
-            
+
             lock (sync_)
             {
                 System.Console.WriteLine("<incoming> " + msg);

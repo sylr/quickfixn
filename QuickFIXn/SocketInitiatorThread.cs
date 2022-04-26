@@ -104,7 +104,7 @@ namespace QuickFix
                     else
                         Disconnect();
                 }
-                return false;                    
+                return false;
             }
             catch (System.Exception e)
             {

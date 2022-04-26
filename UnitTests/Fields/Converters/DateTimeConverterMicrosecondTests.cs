@@ -28,7 +28,7 @@ namespace UnitTests.Fields.Converters
             Assert.AreEqual(456700, convertedDateTime.Nanosecond()); //100 Nanosecond Truncated Resolution
             Assert.AreEqual(dateTimeStringWithNanosecondsTruncated, DateTimeConverter.Convert(convertedDateTime, TimeStampPrecision.Nanosecond));
         }
-        
+
         [Test]
         public void CanConvertFromDateTimeStringWithMicrosecondsToValidDateTimeObject()
         {
@@ -36,17 +36,17 @@ namespace UnitTests.Fields.Converters
             var dateTimeStringWithMicroseconds = "20170305-13:22:12.123456";
 
             //WHEN - it is converted to a date time
-            var convertedDateTime = DateTimeConverter.ConvertToDateTime( dateTimeStringWithMicroseconds );
+            var convertedDateTime = DateTimeConverter.ConvertToDateTime(dateTimeStringWithMicroseconds);
 
             //THEN - the date time object is setup correctly
-            Assert.AreEqual( 2017, convertedDateTime.Year );
+            Assert.AreEqual(2017, convertedDateTime.Year);
             Assert.AreEqual(3, convertedDateTime.Month);
             Assert.AreEqual(5, convertedDateTime.Day);
-            Assert.AreEqual( 13, convertedDateTime.Hour );
+            Assert.AreEqual(13, convertedDateTime.Hour);
             Assert.AreEqual(22, convertedDateTime.Minute);
             Assert.AreEqual(12, convertedDateTime.Second);
             Assert.AreEqual(123, convertedDateTime.Millisecond);
-            Assert.AreEqual( dateTimeStringWithMicroseconds, string.Format( DateTimeConverter.DATE_TIME_FORMAT_WITH_MICROSECONDS, convertedDateTime ) );
+            Assert.AreEqual(dateTimeStringWithMicroseconds, string.Format(DateTimeConverter.DATE_TIME_FORMAT_WITH_MICROSECONDS, convertedDateTime));
         }
 
 
@@ -118,10 +118,10 @@ namespace UnitTests.Fields.Converters
         public void CanConvertFromDateTimeWithMicrosecondsToValidStringWithMicroSecondPrecision()
         {
             //GIVEN - a datetime object with microseconds
-            var dateTime = new DateTime( 2017, 03, 05, 13, 22, 12, 123, DateTimeKind.Utc ) + new TimeSpan( 4560 );
+            var dateTime = new DateTime(2017, 03, 05, 13, 22, 12, 123, DateTimeKind.Utc) + new TimeSpan(4560);
 
             //WHEN - it is serialised to a string with microsecond precision
-            var serialisedDateTime = DateTimeConverter.Convert( dateTime, TimeStampPrecision.Microsecond );
+            var serialisedDateTime = DateTimeConverter.Convert(dateTime, TimeStampPrecision.Microsecond);
 
             //THEN - the serialised string contains microseconds
             Assert.AreEqual("20170305-13:22:12.123456", serialisedDateTime);
@@ -204,11 +204,11 @@ namespace UnitTests.Fields.Converters
         public void CanConvertTimeSpanWithMicroSecondsToStringWithMicroseconds()
         {
             //GIVEN - a time string with microseconds
-            var timeWithMicroSeconds = new TimeSpan( 13, 22, 12 ) + new TimeSpan( 1234560 );
-            var dateTimeWithMicroseconds = new DateTime( timeWithMicroSeconds.Ticks, DateTimeKind.Utc );
+            var timeWithMicroSeconds = new TimeSpan(13, 22, 12) + new TimeSpan(1234560);
+            var dateTimeWithMicroseconds = new DateTime(timeWithMicroSeconds.Ticks, DateTimeKind.Utc);
 
             //WHEN - it is seralised with Microseconds
-            var serialisedDateTime = DateTimeConverter.ConvertTimeOnly(dateTimeWithMicroseconds, TimeStampPrecision.Microsecond );
+            var serialisedDateTime = DateTimeConverter.ConvertTimeOnly(dateTimeWithMicroseconds, TimeStampPrecision.Microsecond);
 
             //THEN - the serialised time contains microseconds
             Assert.AreEqual("13:22:12.123456", serialisedDateTime);

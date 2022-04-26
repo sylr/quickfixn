@@ -286,7 +286,7 @@ namespace QuickFix
         {
             lock (sync_)
             {
-              MessageStore.Get(begSeqNo, endSeqNo, messages);
+                MessageStore.Get(begSeqNo, endSeqNo, messages);
             }
         }
 
@@ -412,7 +412,7 @@ namespace QuickFix
         {
             this.Reset("(unspecified reason)");
         }
-        
+
         public void Reset(string reason)
         {
             lock (sync_)

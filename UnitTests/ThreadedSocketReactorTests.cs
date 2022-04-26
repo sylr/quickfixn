@@ -23,7 +23,7 @@ namespace UnitTests
                     randomPort = _random.Next(5000, 6000);
                     _tcpListener = new TcpListener(IPAddress.Loopback, randomPort);
                     _tcpListener.Start();
-                    
+
                     return randomPort;
                 }
                 catch { }

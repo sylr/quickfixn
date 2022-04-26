@@ -13,7 +13,7 @@ namespace UnitTests
 
         #region Responder Members
         QuickFix.DefaultMessageFactory messageFactory = new QuickFix.DefaultMessageFactory();
-        
+
         public Dictionary<string, Queue<QuickFix.Message>> msgLookup = new Dictionary<string, Queue<QuickFix.Message>>();
         public Queue<QuickFix.Message> dups = new Queue<QuickFix.Message>();
 
@@ -39,7 +39,7 @@ namespace UnitTests
             if (message.Header.IsSetField(possDup))
                 message.Header.GetField(possDup);
 
-            if (possDup.getValue() && msgType.getValue()!= QuickFix.Fields.MsgType.SEQUENCE_RESET)
+            if (possDup.getValue() && msgType.getValue() != QuickFix.Fields.MsgType.SEQUENCE_RESET)
             {
                 dups.Enqueue(message);
             }
@@ -95,7 +95,7 @@ namespace UnitTests
         {
             if (doNotSendException != null)
                 throw doNotSendException;
-            
+
         }
 
         public void FromApp(QuickFix.Message message, QuickFix.SessionID sessionID)
@@ -194,7 +194,7 @@ namespace UnitTests
 
             // acceptor
             session = new QuickFix.Session(false, application, new QuickFix.MemoryStoreFactory(), sessionID,
-                new QuickFix.DataDictionaryProvider(),new QuickFix.SessionSchedule(config), 0, new QuickFix.ScreenLogFactory(settings), new QuickFix.DefaultMessageFactory(), "blah");
+                new QuickFix.DataDictionaryProvider(), new QuickFix.SessionSchedule(config), 0, new QuickFix.ScreenLogFactory(settings), new QuickFix.DefaultMessageFactory(), "blah");
             session.SetResponder(responder);
             session.CheckLatency = false;
 
@@ -250,15 +250,15 @@ namespace UnitTests
 
         public bool SENT_REJECT()
         {
-            return responder.msgLookup.ContainsKey(QuickFix.Fields.MsgType.REJECT) && 
-                responder.msgLookup[QuickFix.Fields.MsgType.REJECT].Count>0;
+            return responder.msgLookup.ContainsKey(QuickFix.Fields.MsgType.REJECT) &&
+                responder.msgLookup[QuickFix.Fields.MsgType.REJECT].Count > 0;
         }
 
-	    public bool SENT_HEART_BEAT()
-	    {
+        public bool SENT_HEART_BEAT()
+        {
             return responder.msgLookup.ContainsKey(QuickFix.Fields.MsgType.HEARTBEAT) &&
                 responder.msgLookup[QuickFix.Fields.MsgType.HEARTBEAT].Count > 0;
-	    }
+        }
 
         public bool SENT_BUSINESS_REJECT()
         {
@@ -313,7 +313,7 @@ namespace UnitTests
 
             QuickFix.Fields.SessionRejectReason reasonField = new QuickFix.Fields.SessionRejectReason();
             msg.GetField(reasonField);
-            if(reasonField.getValue() != reason)
+            if (reasonField.getValue() != reason)
                 return false;
 
             if (!msg.IsSetField(QuickFix.Fields.Tags.RefTagID))
@@ -369,7 +369,7 @@ namespace UnitTests
 
         [Test]
         public void ConditionalTagMissingReject()
-        {   
+        {
             application.fromAppException = new QuickFix.FieldNotFoundException(61);
 
             Logon();
@@ -384,10 +384,10 @@ namespace UnitTests
         public void IncorrectTagValueReject()
         {
             application.fromAppException = new QuickFix.IncorrectTagValue(54);
-            
+
             Logon();
             SendNOSMessage();
-            Assert.That(SENT_REJECT(QuickFix.Fields.SessionRejectReason.VALUE_IS_INCORRECT,54));
+            Assert.That(SENT_REJECT(QuickFix.Fields.SessionRejectReason.VALUE_IS_INCORRECT, 54));
 
         }
 
@@ -404,7 +404,7 @@ namespace UnitTests
         [Test]
         public void LogonReject()
         {
-            application.fromAdminException  = new QuickFix.RejectLogon("Failed Logon");
+            application.fromAdminException = new QuickFix.RejectLogon("Failed Logon");
             Logon();
 
             Assert.That(SENT_LOGOUT());
@@ -501,7 +501,7 @@ namespace UnitTests
         public void TestResendSessionLevelReject()
         {
             Assert.False(session.ResendSessionLevelRejects); // check for correct default
-            Logon(); 
+            Logon();
 
             QuickFix.FIX42.Reject reject = new QuickFix.FIX42.Reject(
                 new QuickFix.Fields.RefSeqNum(10));
@@ -541,12 +541,12 @@ namespace UnitTests
         public void TestMillisecondsInSendingTimeStamp()
         {
             // MS in timestamp should default to Y
-            Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Millisecond );
+            Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Millisecond);
 
             // Ms should show up
             Logon();
             AssertMsInTag(QuickFix.Fields.MsgType.LOGON, QuickFix.Fields.Tags.SendingTime, true);
-            
+
             // No ms
             session.TimeStampPrecision = QuickFix.Fields.Converters.TimeStampPrecision.Second;
             Logon();
@@ -581,7 +581,7 @@ namespace UnitTests
             // Less than FIX42 - no microseconds in timestamp, even if you tell it to
             sessionID = new QuickFix.SessionID(QuickFix.FixValues.BeginString.FIX40, "SENDER", "TARGET");
             session.SessionID = sessionID;
-            session.TimeStampPrecision =  QuickFix.Fields.Converters.TimeStampPrecision.Microsecond;
+            session.TimeStampPrecision = QuickFix.Fields.Converters.TimeStampPrecision.Microsecond;
             Logon40();
             Assert.That(responder.msgLookup[QuickFix.Fields.MsgType.LOGON].Count == 3);
             AssertMicrosecondsInTag(QuickFix.Fields.MsgType.LOGON, QuickFix.Fields.Tags.SendingTime, false);
@@ -591,11 +591,11 @@ namespace UnitTests
         public void TestMillisecondsInOrigSendingTimeStamp()
         {
             // MS in timestamp should default 
-            Assert.That( session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Millisecond );
-            
+            Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Millisecond);
+
             // Logon first
             Logon();
-            
+
             // Do a resend request
             SendResendRequest(0, 2);
             AssertMsInTag(QuickFix.Fields.MsgType.SEQUENCERESET, QuickFix.Fields.Tags.OrigSendingTime, true);
@@ -785,7 +785,7 @@ namespace UnitTests
             QuickFix.SessionID validSessionID = new QuickFix.SessionID("FIX.4.2", "SENDER", "TARGET");
 
             Assert.That(QuickFix.Session.DoesSessionExist(invalidSessionID), Is.EqualTo(false));
-            Assert.That(QuickFix.Session.DoesSessionExist(validSessionID), Is.EqualTo(true));            
+            Assert.That(QuickFix.Session.DoesSessionExist(validSessionID), Is.EqualTo(true));
         }
 
         [Test]

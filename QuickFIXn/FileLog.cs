@@ -25,8 +25,8 @@ namespace QuickFix
         public FileLog(string fileLogPath, SessionID sessionID)
         {
             Init(fileLogPath, Prefix(sessionID));
-        }   
-        
+        }
+
 
         private void Init(string fileLogPath, string prefix)
         {
@@ -36,8 +36,8 @@ namespace QuickFix
             messageLogFileName_ = System.IO.Path.Combine(fileLogPath, prefix + ".messages.current.log");
             eventLogFileName_ = System.IO.Path.Combine(fileLogPath, prefix + ".event.current.log");
 
-            messageLog_ = new System.IO.StreamWriter(messageLogFileName_,true);
-            eventLog_ = new System.IO.StreamWriter(eventLogFileName_,true);
+            messageLog_ = new System.IO.StreamWriter(messageLogFileName_, true);
+            eventLog_ = new System.IO.StreamWriter(eventLogFileName_, true);
 
             messageLog_.AutoFlush = true;
             eventLog_.AutoFlush = true;
@@ -114,7 +114,7 @@ namespace QuickFix
 
             lock (sync_)
             {
-                eventLog_.WriteLine(Fields.Converters.DateTimeConverter.Convert(System.DateTime.UtcNow) + " : "+ s);
+                eventLog_.WriteLine(Fields.Converters.DateTimeConverter.Convert(System.DateTime.UtcNow) + " : " + s);
             }
         }
 

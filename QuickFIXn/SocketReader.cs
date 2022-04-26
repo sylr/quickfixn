@@ -34,7 +34,7 @@ namespace QuickFix
         public SocketReader(TcpClient tcpClient, SocketSettings settings, ClientHandlerThread responder)
             : this(tcpClient, settings, responder, null)
         {
-            
+
         }
 
         internal SocketReader(
@@ -149,7 +149,7 @@ namespace QuickFix
                         DisconnectClient();
                         return;
                     }
-                    else if(IsAssumedSession(qfSession_.SessionID))
+                    else if (IsAssumedSession(qfSession_.SessionID))
                     {
                         this.Log("ERROR: Disconnecting; received message for unknown session: " + msg);
                         qfSession_ = null;
@@ -258,7 +258,7 @@ namespace QuickFix
 
         private bool IsAssumedSession(SessionID sessionID)
         {
-            return acceptorDescriptor_ != null 
+            return acceptorDescriptor_ != null
                    && !acceptorDescriptor_.GetAcceptedSessions().Any(kv => kv.Key.Equals(sessionID));
         }
 

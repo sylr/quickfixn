@@ -47,7 +47,7 @@ namespace UnitTests
 
             //obsolete accessor
 #pragma warning disable 618
-            Assert.AreEqual(2,ddf.Enums.Count);
+            Assert.AreEqual(2, ddf.Enums.Count);
             Assert.IsTrue(ddf.Enums.Contains("a"));
             Assert.IsTrue(ddf.Enums.Contains("b"));
 #pragma warning restore 618

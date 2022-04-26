@@ -7,11 +7,11 @@ namespace UnitTests
     [TestFixture]
     public class ParserTest
     {
-        const string normalLength   = "8=FIX.4.2\x01" + "9=12\x01" + "35=A\x01" + " 108=30\x01" + "10=31\x01";
-        const string badLength      = "8=FIX.4.2\x01" + "9=A\x01"  + "35=A\x01" + "108=30\x01"  + "10=31\x01";
-        const string negativeLength = "8=FIX.4.2\x01" + "9=-1\x01" + "35=A\x01" + "108=30\x01"  + "10=31\x01";
-        const string incomplete_1   = "8=FIX.4.2";
-        const string incomplete_2   = "8=FIX.4.2\x01" + "9=12";
+        const string normalLength = "8=FIX.4.2\x01" + "9=12\x01" + "35=A\x01" + " 108=30\x01" + "10=31\x01";
+        const string badLength = "8=FIX.4.2\x01" + "9=A\x01" + "35=A\x01" + "108=30\x01" + "10=31\x01";
+        const string negativeLength = "8=FIX.4.2\x01" + "9=-1\x01" + "35=A\x01" + "108=30\x01" + "10=31\x01";
+        const string incomplete_1 = "8=FIX.4.2";
+        const string incomplete_2 = "8=FIX.4.2\x01" + "9=12";
 
         public byte[] StrToBytes(string str)
         {
@@ -48,7 +48,7 @@ namespace UnitTests
         public void ReadCompleteFixMessages()
         {
             const string fixMsg1 = "8=FIX.4.2\x01" + "9=12\x01" + "35=A\x01" + "108=30\x01" + "10=31\x01";
-            const string fixMsg2 = "8=FIX.4.2\x01" + "9=17\x01" + "35=4\x01" + "36=88\x01"  + "123=Y\x01"  + "10=34\x01";
+            const string fixMsg2 = "8=FIX.4.2\x01" + "9=17\x01" + "35=4\x01" + "36=88\x01" + "123=Y\x01" + "10=34\x01";
             const string fixMsg3 = "8=FIX.4.2\x01" + "9=19\x01" + "35=A\x01" + "108=30\x01" + "9710=8\x01" + "10=31\x01";
 
             Parser parser = new Parser();
@@ -99,7 +99,7 @@ namespace UnitTests
 
             string readFixMsg;
             Assert.Throws<QuickFix.MessageParseError>(delegate { parser.ReadFixMessage(out readFixMsg); });
-            
+
             // nothing thrown now because the previous call removes bad data from buffer:
             Assert.DoesNotThrow(delegate { parser.ReadFixMessage(out readFixMsg); });
         }

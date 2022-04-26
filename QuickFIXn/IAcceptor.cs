@@ -41,7 +41,7 @@ namespace QuickFix
         /// Get accepted socket end points
         /// </summary>
         /// <returns>a map of SessionIDs to EndPoints</returns>
-        Dictionary<SessionID,IPEndPoint> GetAcceptorAddresses();
+        Dictionary<SessionID, IPEndPoint> GetAcceptorAddresses();
 
         /// <summary>
         /// Add a new session after acceptor has been started

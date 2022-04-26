@@ -21,7 +21,7 @@ namespace QuickFix
         private readonly IReadOnlyDictionary<string, IMessageFactory> _factories;
 
         private QuickFix.Fields.ApplVerID _defaultApplVerId;
-        
+
         /// <summary>
         /// This constructor will
         /// 1. Dynamically load all QuickFix.*.dll assemblies into the current appdomain
@@ -96,7 +96,7 @@ namespace QuickFix
         public Group Create(string beginString, string msgType, int groupCounterTag)
         {
             string key = beginString;
-            if(beginString.Equals(FixValues.BeginString.FIXT11))
+            if (beginString.Equals(FixValues.BeginString.FIXT11))
             {
                 key = QuickFix.FixValues.ApplVerID.ToBeginString(_defaultApplVerId.getValue());
             }

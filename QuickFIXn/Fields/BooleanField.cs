@@ -12,7 +12,7 @@ namespace QuickFix.Fields
     {
         public BooleanField(int tag)
             : base(tag, false) { }
-           
+
         public BooleanField(int tag, Boolean b)
             : base(tag, b) { }
 

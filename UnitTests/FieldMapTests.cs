@@ -58,7 +58,7 @@ namespace UnitTests
             Assert.Throws(typeof(FieldNotFoundException),
                 delegate { fieldmap.GetString(99900); });
         }
-        
+
 
         [Test]
         public void StringFieldTest()
@@ -118,15 +118,15 @@ namespace UnitTests
             Assert.AreEqual(new DateTime(2009, 12, 10), ed.Obj);
             fieldmap.SetField(new MDEntryDate(new DateTime(2010, 12, 10)));
             DateOnlyField r = fieldmap.GetField(ed);
-            Assert.AreEqual(new DateTime(2010, 12, 10), ed.getValue());            
-            
+            Assert.AreEqual(new DateTime(2010, 12, 10), ed.getValue());
+
             Assert.AreSame(r, ed);
             Assert.AreEqual("20101210", ed.ToString());
         }
 
         [Test]
         public void TimeOnlyFieldTest()
-        {            
+        {
             fieldmap.SetField(new TimeOnlyField(Tags.MDEntryTime, new DateTime(1, 1, 1, 1, 2, 3), false));
             MDEntryTime et = new MDEntryTime();
             fieldmap.GetField(et);
@@ -134,7 +134,7 @@ namespace UnitTests
             fieldmap.SetField(new MDEntryTime(new DateTime(1, 1, 1, 1, 2, 5)));
             TimeOnlyField r = fieldmap.GetField(et);
             Assert.AreEqual(new DateTime(1, 1, 1, 1, 2, 5).TimeOfDay, et.getValue().TimeOfDay);
-            
+
             Assert.AreSame(r, et);
             Assert.AreEqual("01:02:05.000", et.ToString());
         }

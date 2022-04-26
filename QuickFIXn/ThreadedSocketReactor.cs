@@ -48,7 +48,7 @@ namespace QuickFix
         public ThreadedSocketReactor(IPEndPoint serverSocketEndPoint, SocketSettings socketSettings,
             QuickFix.Dictionary sessionDict) : this(serverSocketEndPoint, socketSettings, sessionDict, null)
         {
-            
+
         }
         internal ThreadedSocketReactor(IPEndPoint serverSocketEndPoint, SocketSettings socketSettings, QuickFix.Dictionary sessionDict, AcceptorSocketDescriptor acceptorDescriptor)
         {
@@ -84,7 +84,7 @@ namespace QuickFix
                         {
                             try
                             {
-                                IPEndPoint killerEndPoint =  new IPEndPoint(IPAddress.Loopback, serverSocketEndPoint_.Port);
+                                IPEndPoint killerEndPoint = new IPEndPoint(IPAddress.Loopback, serverSocketEndPoint_.Port);
                                 killer.Connect(killerEndPoint);
                             }
                             catch (System.Exception e)
@@ -114,7 +114,7 @@ namespace QuickFix
                     {
                         tcpListener_.Start();
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         this.Log("Error starting listener: " + e.Message);
                         throw;
@@ -160,10 +160,10 @@ namespace QuickFix
 
         internal void OnClientHandlerThreadExited(object sender, ClientHandlerThread.ExitedEventArgs e)
         {
-            lock(sync_)
+            lock (sync_)
             {
                 ClientHandlerThread t = null;
-                if(clientThreads_.TryGetValue(e.ClientHandlerThread.Id, out t))
+                if (clientThreads_.TryGetValue(e.ClientHandlerThread.Id, out t))
                 {
                     clientThreads_.Remove(t.Id);
                     t.Dispose();

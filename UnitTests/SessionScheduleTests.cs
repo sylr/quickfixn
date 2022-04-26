@@ -98,7 +98,7 @@ namespace UnitTests
             settings.SetDay(QuickFix.SessionSettings.START_DAY, System.DayOfWeek.Monday);
             settings.SetDay(QuickFix.SessionSettings.END_DAY, System.DayOfWeek.Monday);
             QuickFix.SessionSchedule sched = new QuickFix.SessionSchedule(settings);
-	    
+
             //a sunday
             Assert.IsTrue(sched.IsSessionTime(new DateTime(2011, 10, 16, 9, 43, 0, DateTimeKind.Utc)));
             Assert.IsTrue(sched.IsSessionTime(new DateTime(2011, 10, 16, 23, 59, 59, DateTimeKind.Utc)));
@@ -124,7 +124,7 @@ namespace UnitTests
             settings.SetDay(QuickFix.SessionSettings.START_DAY, System.DayOfWeek.Monday);
             settings.SetDay(QuickFix.SessionSettings.END_DAY, System.DayOfWeek.Monday);
             QuickFix.SessionSchedule sched = new QuickFix.SessionSchedule(settings);
-	    
+
             //a sunday
             Assert.IsTrue(sched.IsSessionTime(new DateTime(2011, 10, 16, 23, 59, 59, DateTimeKind.Utc)));
             Assert.IsTrue(sched.IsSessionTime(new DateTime(2011, 10, 16, 0, 0, 0, DateTimeKind.Utc)));
@@ -150,7 +150,7 @@ namespace UnitTests
             settings.SetDay(QuickFix.SessionSettings.START_DAY, System.DayOfWeek.Monday);
             settings.SetDay(QuickFix.SessionSettings.END_DAY, System.DayOfWeek.Monday);
             QuickFix.SessionSchedule sched = new QuickFix.SessionSchedule(settings);
-	    
+
             //a sunday
             Assert.IsFalse(sched.IsSessionTime(new DateTime(2011, 10, 16, 23, 59, 59, DateTimeKind.Utc)));
             Assert.IsFalse(sched.IsSessionTime(new DateTime(2011, 10, 16, 0, 0, 0, DateTimeKind.Utc)));
@@ -276,7 +276,7 @@ namespace UnitTests
             Assert.IsFalse(sched.IsSessionTime(new DateTime(2011, 10, 22, 7, 00, 1, DateTimeKind.Utc)));
             Assert.IsFalse(sched.IsSessionTime(new DateTime(2011, 10, 22, 15, 30, 0, DateTimeKind.Utc)));
         }
-        
+
 
         [Test]
         public void testDailyIsSessionTime()
@@ -321,7 +321,7 @@ namespace UnitTests
             settings.SetString(QuickFix.SessionSettings.END_TIME, "00:12:00");
             settings.SetString(QuickFix.SessionSettings.TIME_ZONE, "Doh");
 
-            Assert.Throws(typeof (TimeZoneNotFoundException), delegate { new QuickFix.SessionSchedule(settings); });
+            Assert.Throws(typeof(TimeZoneNotFoundException), delegate { new QuickFix.SessionSchedule(settings); });
         }
 
         [Test]
@@ -334,7 +334,7 @@ namespace UnitTests
             settings.SetString(QuickFix.SessionSettings.USE_LOCAL_TIME, "Y");
             settings.SetString(QuickFix.SessionSettings.TIME_ZONE, EASTERN_STANDARD_TIME_ZONE_ID);
 
-            Assert.Throws(typeof (QuickFix.ConfigError), delegate { new QuickFix.SessionSchedule(settings); });
+            Assert.Throws(typeof(QuickFix.ConfigError), delegate { new QuickFix.SessionSchedule(settings); });
         }
 
         [Test]

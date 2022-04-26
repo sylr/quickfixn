@@ -13,7 +13,7 @@ namespace QuickFix.Fields
             : base(tag, 0) { }
 
         public IntField(int tag, int val)
-            : base(tag, val) {}
+            : base(tag, val) { }
 
         // quickfix compat
         public int getValue()

@@ -411,7 +411,7 @@ namespace UnitTests
 
             Assert.IsTrue(WaitForLogonStatus(dynamicCompID), "Failde to logon dynamic added acceptor session with another port");
         }
-        
+
         [Test]
         public void DynamicAcceptor()
         {

@@ -59,17 +59,17 @@ namespace UnitTests
                 .AppendLine(partialConfiguration.ToString())
                 .ToString();
             SessionSettings settings = new SessionSettings(new System.IO.StringReader(configuration));
-            
+
             SessionID session1 = new SessionID("FIX.4.2", "ISLD", "TW");
             SessionID session2 = new SessionID("FIX.4.1", "ISLD", "WT");
             SessionID session3 = new SessionID("FIX.4.0", "ARCA", "TW");
             SessionID session4 = new SessionID("FIX.4.0", "ARCA", "WT");
             SessionID session5 = new SessionID("FIX.4.0", "NYSE", "TW", "QUAL1");
             SessionID session6 = new SessionID("FIX.4.0", "NYSE", "TW", "QUAL2");
-            
-            Assert.That(settings.Get().GetString( "Empty" ), Is.EqualTo("") );
-            
-            Assert.That(settings.Get().GetLong( "Value" ), Is.EqualTo(4) );
+
+            Assert.That(settings.Get().GetString("Empty"), Is.EqualTo(""));
+
+            Assert.That(settings.Get().GetLong("Value"), Is.EqualTo(4));
             Assert.That(settings.Get(session1).GetLong("Value"), Is.EqualTo(1));
             Assert.That(settings.Get(session2).GetLong("Value"), Is.EqualTo(2));
             Assert.That(settings.Get(session3).GetLong("Value"), Is.EqualTo(3));
@@ -160,7 +160,7 @@ namespace UnitTests
                     .ToString();
             Assert.Throws<ConfigError>(delegate { new SessionSettings(new System.IO.StringReader(configuration)); });
         }
-        
+
         [Test]
         public void StripSpaces()
         {
@@ -176,7 +176,7 @@ namespace UnitTests
                     .AppendLine("  Bool  =  N  ")
                     .ToString();
             SessionSettings settings = new SessionSettings(new System.IO.StringReader(configuration));
-            
+
             Assert.That(settings.Get().GetString("ConnectionType"), Is.EqualTo("initiator"));
 
             SessionID session = new SessionID("FIX.4.2", "ISLD", "TW");
@@ -194,7 +194,7 @@ namespace UnitTests
         {
             SessionSettings settings = new SessionSettings();
             SessionID sessionID = new SessionID("FIX.4.2", "SenderCompID", "TargetCompID");
-            
+
             // ConnectionType not set
             QuickFix.Dictionary dictionary = new QuickFix.Dictionary();
             Assert.Throws<ConfigError>(delegate { settings.Set(sessionID, dictionary); });
@@ -206,7 +206,7 @@ namespace UnitTests
             // ConnectionType set to valid value
             dictionary.SetString(SessionSettings.CONNECTION_TYPE, "initiator");
             Assert.DoesNotThrow(delegate { settings.Set(sessionID, dictionary); });
-            
+
             // Invalid BeginString
             sessionID = new SessionID("FIX4.2", "SenderCompID", "TargetCompID");
             Assert.Throws<ConfigError>(delegate { settings.Set(sessionID, dictionary); });
@@ -261,7 +261,7 @@ namespace UnitTests
                 .ToString();
 
             SessionSettings settings = new SessionSettings(new System.IO.StringReader(settingsString));
-            
+
             SessionID id = new SessionID("FIX.4.2", "Company", "FixedIncome", "HongKong", "CLIENT1", "HedgeFund", "NYC");
             Assert.That(settings.Get(id).GetString("HeartBtInt"), Is.EqualTo("60"));
             Assert.That(settings.Get(id).GetString("BeginString"), Is.EqualTo("FIX.4.2"));
@@ -278,7 +278,7 @@ namespace UnitTests
             Assert.That(settings.Get(id).GetString("StartTime"), Is.EqualTo("06:00:00"));
             Assert.That(settings.Get(id).GetString("EndTime"), Is.EqualTo("05:59:00"));
             id = null;
-            foreach(SessionID sid in settings.GetSessions())
+            foreach (SessionID sid in settings.GetSessions())
             {
                 id = sid;
                 break;

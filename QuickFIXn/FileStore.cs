@@ -196,7 +196,7 @@ namespace QuickFix
             }
 
         }
-        
+
         /// <summary>
         /// Store a message
         /// </summary>

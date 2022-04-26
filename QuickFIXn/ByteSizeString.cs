@@ -15,7 +15,7 @@ namespace QuickFix
         {
             this._str = new byte[sz];
             for (int i = 0; i < sz; i++)
-                _str[i] = buf[i+pos];
+                _str[i] = buf[i + pos];
         }
 
         public override string ToString()
@@ -23,7 +23,7 @@ namespace QuickFix
             return CharEncoding.DefaultEncoding.GetString(_str);
         }
 
-        public int IndexOf( byte nextchar, int pos )
+        public int IndexOf(byte nextchar, int pos)
         {
             if (pos > _str.Length)
                 throw new OverflowException("pos is greater than string length!");
@@ -31,7 +31,7 @@ namespace QuickFix
             int retpos;
             for (retpos = pos; retpos < _str.Length; ++retpos)
             {
-                if (_str[retpos] == nextchar )
+                if (_str[retpos] == nextchar)
                     return retpos;
             }
             throw new OverflowException("= not found!");
@@ -43,9 +43,9 @@ namespace QuickFix
             pos = IndexOf(EQ, start);
             int ret = 0;
             int factor = 1;
-            for( int i =(pos-1); i >= start; i--)
+            for (int i = (pos - 1); i >= start; i--)
             {
-                ret += (_str[i]-48) * factor;
+                ret += (_str[i] - 48) * factor;
                 factor *= 10;
             }
             pos += 1;

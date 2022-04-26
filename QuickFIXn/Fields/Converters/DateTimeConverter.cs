@@ -22,7 +22,7 @@ namespace QuickFix.Fields.Converters
         public const string TIME_ONLY_FORMAT_WITH_MICROSECONDS = "{0:HH:mm:ss.ffffff}";
         public const string TIME_ONLY_FORMAT_WITH_MILLISECONDS = "{0:HH:mm:ss.fff}";
         public const string TIME_ONLY_FORMAT_WITHOUT_MILLISECONDS = "{0:HH:mm:ss}";
-        
+
         public const string DATE_TIME_WITH_MICROSECONDS = "yyyyMMdd-HH:mm:ss.ffffff";
         public static int DATE_TIME_MAXLENGTH_WITHOUT_NANOSECONDS = DATE_TIME_WITH_MICROSECONDS.Length;
         public static string[] DATE_TIME_FORMATS = { DATE_TIME_WITH_MICROSECONDS, "yyyyMMdd-HH:mm:ss.fff", "yyyyMMdd-HH:mm:ss" };
@@ -57,7 +57,7 @@ namespace QuickFix.Fields.Converters
         private static System.DateTime ConvertFromNanoString(string str, string[] formats)
         {
             int i = str.IndexOf('.');
-            string dec = str.Substring(i+1);
+            string dec = str.Substring(i + 1);
             System.DateTimeKind kind;
             int offset = 0;
 
@@ -209,11 +209,11 @@ namespace QuickFix.Fields.Converters
         /// <param name="dt">the DateTime to convert</param>
         /// <param name="includeMilliseconds">if true, include milliseconds in the result</param>
         /// <returns>FIX-formatted DataTime</returns>
-        public static string Convert( System.DateTime dt, bool includeMilliseconds )
+        public static string Convert(System.DateTime dt, bool includeMilliseconds)
         {
-            return includeMilliseconds ? Convert(dt, TimeStampPrecision.Millisecond): Convert( dt, TimeStampPrecision.Second );
+            return includeMilliseconds ? Convert(dt, TimeStampPrecision.Millisecond) : Convert(dt, TimeStampPrecision.Second);
         }
-        
+
         /// <summary>
         /// Gets the nanoseconds component of the date represented by this instance truncated to 100 nanosecond resolution
         /// </summary>
@@ -239,7 +239,7 @@ namespace QuickFix.Fields.Converters
         /// <param name="dt">The dt.</param>
         /// <param name="precision">The precision.</param>
         /// <returns></returns>
-        public static string Convert(System.DateTime dt, TimeStampPrecision precision )
+        public static string Convert(System.DateTime dt, TimeStampPrecision precision)
         {
             if (precision == TimeStampPrecision.Nanosecond)
             {
@@ -272,9 +272,9 @@ namespace QuickFix.Fields.Converters
             return DateTimeConverter.ConvertTimeOnly(dt, true);
         }
 
-        public static string ConvertTimeOnly( System.DateTime dt, bool includeMilliseconds )
+        public static string ConvertTimeOnly(System.DateTime dt, bool includeMilliseconds)
         {
-            return includeMilliseconds ? ConvertTimeOnly( dt, TimeStampPrecision.Millisecond ) : ConvertTimeOnly( dt, TimeStampPrecision.Second );
+            return includeMilliseconds ? ConvertTimeOnly(dt, TimeStampPrecision.Millisecond) : ConvertTimeOnly(dt, TimeStampPrecision.Second);
         }
 
         public static string ConvertTimeOnly(System.DateTime dt, TimeStampPrecision precision)

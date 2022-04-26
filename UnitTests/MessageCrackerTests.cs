@@ -12,7 +12,7 @@ namespace UnitTests
     [TestFixture]
     public class MessageCrackerTests
     {
-        private readonly SessionID _DummySessionID = new SessionID("a","b","c");
+        private readonly SessionID _DummySessionID = new SessionID("a", "b", "c");
 
         [SetUp]
         public void Setup()

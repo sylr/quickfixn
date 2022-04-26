@@ -58,9 +58,9 @@ namespace QuickFix
             if (utc.Kind != System.DateTimeKind.Utc)
                 throw new System.ArgumentException("Only UTC time is supported", "time");
 
-            if(UseLocalTime)
+            if (UseLocalTime)
                 return utc.ToLocalTime();
-            else if (TimeZone==null)
+            else if (TimeZone == null)
                 return utc;
             else
                 return System.TimeZoneInfo.ConvertTimeFromUtc(utc, TimeZone);

@@ -11,7 +11,7 @@ namespace QuickFix
         {
             public enum TypeEnum { Field, Component, Group };
 
-            public XMLMsgComponent(string name, bool req, TypeEnum type )
+            public XMLMsgComponent(string name, bool req, TypeEnum type)
             {
                 Name = name;
                 Required = req;

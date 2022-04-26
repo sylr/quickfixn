@@ -49,7 +49,7 @@ namespace QuickFix
             : base("Could not convert field: " + msg, innerException)
         { }
     }
-    
+
     /// <summary>
     /// Session cannot be found for specified action
     /// </summary>
@@ -270,7 +270,7 @@ namespace QuickFix
     public class IncorrectDataFormat : TagException
     {
         public IncorrectDataFormat(int field, System.Exception innerException)
-            : base(field, FixValues.SessionRejectReason.INCORRECT_DATA_FORMAT_FOR_VALUE, innerException) 
+            : base(field, FixValues.SessionRejectReason.INCORRECT_DATA_FORMAT_FOR_VALUE, innerException)
         { }
     }
 
@@ -285,8 +285,8 @@ namespace QuickFix
     public class RepeatingGroupCountMismatch : TagException
     {
         public RepeatingGroupCountMismatch(int tag)
-            :base(tag, FixValues.SessionRejectReason.INCORRECT_NUM_IN_GROUP_COUNT_FOR_REPEATING_GROUP)
-        {}
+            : base(tag, FixValues.SessionRejectReason.INCORRECT_NUM_IN_GROUP_COUNT_FOR_REPEATING_GROUP)
+        { }
     }
 
     /// <summary>

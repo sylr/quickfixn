@@ -15,13 +15,13 @@ namespace AcceptanceTest
                 System.Environment.Exit(2);
             }
 
-            FileLog debugLog = new FileLog("log", new SessionID("AT", "Application", "Debug")); 
+            FileLog debugLog = new FileLog("log", new SessionID("AT", "Application", "Debug"));
             ThreadedSocketAcceptor acceptor = null;
             try
             {
                 ATApplication testApp = new ATApplication(debugLog);
-                testApp.StopMeEvent += new System.Action(delegate() { _stopMe = true; });
-                
+                testApp.StopMeEvent += new System.Action(delegate () { _stopMe = true; });
+
                 SessionSettings settings = new SessionSettings(args[0]);
                 IMessageStoreFactory storeFactory = new FileStoreFactory(settings);
                 ILogFactory logFactory = null;
@@ -55,10 +55,10 @@ namespace AcceptanceTest
 
             finally
             {
-                if(acceptor != null)
+                if (acceptor != null)
                     acceptor.Stop();
             }
-            
+
         }
     }
 }

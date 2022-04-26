@@ -114,7 +114,7 @@ namespace QuickFix
         {
             if (_fields.ContainsKey(field.Tag) && !overwrite)
                 return false;
-            
+
             SetField(field);
             return true;
         }
@@ -365,7 +365,7 @@ namespace QuickFix
         {
             try
             {
-                Fields.IField fld = _fields[tag];                
+                Fields.IField fld = _fields[tag];
                 return DateTimeConverter.ConvertToDateOnly(fld.ToString());
             }
             catch (System.Collections.Generic.KeyNotFoundException)
@@ -603,13 +603,13 @@ namespace QuickFix
                 foreach (Group group in groupList)
                     total += group.CalculateLength();
             }
-    
+
             return total;
         }
 
         public virtual string CalculateString()
         {
-            if( FieldOrder != null )
+            if (FieldOrder != null)
                 return CalculateString(new StringBuilder(), FieldOrder);
             else
                 return CalculateString(new StringBuilder(), new int[0]);
@@ -618,7 +618,7 @@ namespace QuickFix
         public virtual string CalculateString(StringBuilder sb, int[] preFields)
         {
             HashSet<int> groupCounterTags = new HashSet<int>(_groups.Keys);
-            
+
             foreach (int preField in preFields)
             {
                 if (IsSetField(preField))
@@ -643,7 +643,7 @@ namespace QuickFix
                 sb.Append(Message.SOH);
             }
 
-            foreach(int counterTag in _groups.Keys)
+            foreach (int counterTag in _groups.Keys)
             {
                 if (preFields.Contains(counterTag))
                     continue; //already did this one
@@ -669,7 +669,7 @@ namespace QuickFix
         /// <returns></returns>
         public int GroupCount(int fieldNo)
         {
-            if(_groups.ContainsKey(fieldNo))
+            if (_groups.ContainsKey(fieldNo))
             {
                 return _groups[fieldNo].Count;
             }

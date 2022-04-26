@@ -11,7 +11,7 @@ namespace Executor
     class Program
     {
         private const string HttpServerPrefix = "http://127.0.0.1:5080/";
-        
+
         [STAThread]
         static void Main(string[] args)
         {
@@ -33,14 +33,14 @@ namespace Executor
                 ILogFactory logFactory = new FileLogFactory(settings);
                 ThreadedSocketAcceptor acceptor = new ThreadedSocketAcceptor(executorApp, storeFactory, settings, logFactory);
                 HttpServer srv = new HttpServer(HttpServerPrefix, settings);
-                
+
                 acceptor.Start();
                 srv.Start();
-                
-                Console.WriteLine("View Executor status: "+HttpServerPrefix);
+
+                Console.WriteLine("View Executor status: " + HttpServerPrefix);
                 Console.WriteLine("press <enter> to quit");
                 Console.Read();
-                
+
                 srv.Stop();
                 acceptor.Stop();
             }

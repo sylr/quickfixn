@@ -148,7 +148,7 @@ namespace Acceptor
             bool confirm = false;
             string urlOriginalString = request.Url.OriginalString;
             StringBuilder sbHtmlPageBody = _sbHtmlHeader;
-            
+
             if (request.QueryString["confirm"] != null)
             {
                 if (Convert.ToInt16(request.QueryString["confirm"]) != 0)
@@ -292,7 +292,7 @@ namespace Acceptor
 
             if (request.QueryString["confirm"] != null)
             {
-                if (Convert.ToInt16(request.QueryString["confirm"])!=0)
+                if (Convert.ToInt16(request.QueryString["confirm"]) != 0)
                 {
                     confirm = true;
                     sessionDetails.Reset("Reset from WebInterface");
@@ -305,7 +305,7 @@ namespace Acceptor
                 sbHtmlPageBody = new StringBuilder();
                 sbHtmlPageBody.AppendFormat(@"<HEAD><META http-equiv='refresh' content=2;URL=/session?{0} /><CENTER><TITLE>QuickFIX Engine Web Interface</TITLE><H1>QuickFIX Engine Web Interface</H1></CENTER>", GetParameterList(urlOriginalString));
                 sbHtmlPageBody.AppendFormat(@"<CENTER>[<A HREF='/'>HOME</A>]&nbsp;[<A HREF='{0}'>RELOAD</A>]</CENTER><HR/></HEAD><BODY>", urlOriginalString);
-                sbHtmlPageBody.AppendFormat("<CENTER><h2><A HREF='/session?{0}'>{1}</A> has been reset</h2></CENTER>",GetParameterList(url), sessionId);
+                sbHtmlPageBody.AppendFormat("<CENTER><h2><A HREF='/session?{0}'>{1}</A> has been reset</h2></CENTER>", GetParameterList(url), sessionId);
             }
             else
             {
@@ -316,7 +316,7 @@ namespace Acceptor
         }
 
 
-        private string ProcessRoot( HttpListenerRequest request)
+        private string ProcessRoot(HttpListenerRequest request)
         {
             StringBuilder sbHtmlPageBody = _sbHtmlHeader;
 
@@ -325,10 +325,10 @@ namespace Acceptor
 
             //session management links
             sbHtmlPageBody.AppendFormat(@"<CENTER><A HREF='/resetSessions{0}'>RESET</A>&nbsp;<A HREF='/refreshSessions'>REFRESH</A>&nbsp;<A HREF='/enableSessions'>ENABLE</A>&nbsp;<A HREF='/disableSessions'>DISABLE</A></CENTER><HR/></HEADER><BODY>", GetParameterList(request.Url.OriginalString));
-            
+
             //Start the table generation
             sbHtmlPageBody.Append("<table id=\"sessionlist\" style=\"border-width:1; padding:2; width:100%\">");
-            
+
             sbHtmlPageBody.Append("<tr>");
             sbHtmlPageBody.Append(AddCell("Session", true));
             sbHtmlPageBody.Append(AddCell("Type", true));
@@ -468,14 +468,14 @@ namespace Acceptor
                 url = RemoveQueryStringByKey(urlOriginalString, "PersistMessages");
             }
 
-            
+
             sbHtmlPageBody.AppendFormat(@"<CENTER>{0}</CENTER><HR/>", sessionId);
             sbHtmlPageBody.AppendFormat(@"<CENTER>[<A HREF='/resetSession?{0}'>RESET</A>]&nbsp;[<A HREF='/refreshSession?{0}'>REFRESH</A>]</CENTER><HR/></HEADER><BODY>", GetParameterList(urlOriginalString));
 
             sbHtmlPageBody.Append("<table id=\"session_details\" style=\"border-width:1; padding:2; width:100%\">");
-            
+
             sbHtmlPageBody.Append(AddRow("Enabled", sessionDetails.IsEnabled, url));
-            sbHtmlPageBody.Append(AddRow("ConnectionType", sessionDetails.IsInitiator?"initiator": "acceptor"));
+            sbHtmlPageBody.Append(AddRow("ConnectionType", sessionDetails.IsInitiator ? "initiator" : "acceptor"));
             sbHtmlPageBody.Append(AddRow("SessionTime", sessionDetails.IsSessionTime));
             sbHtmlPageBody.Append(AddRow("LoggedOn", sessionDetails.IsLoggedOn));
             sbHtmlPageBody.Append(AddRow("Next Incoming", sessionDetails.NextTargetMsgSeqNum, url));
@@ -520,7 +520,7 @@ namespace Acceptor
             return HttpUtility.ParseQueryString((new Uri(url).Query)).ToString();
         }
 
-        private static string AddRow(string colName, bool value, string url="")
+        private static string AddRow(string colName, bool value, string url = "")
         {
             string valueAsStr = value ? "yes" : "no";
             string innerHtml = url.Length > 0
@@ -552,7 +552,7 @@ namespace Acceptor
         private static string AddCell(string cellContent, bool header = false)
         {
             string entryType = header ? "th" : "td";
-            return "<"+entryType+" align=\"left\">" + cellContent + "</"+entryType+">";
+            return "<" + entryType + " align=\"left\">" + cellContent + "</" + entryType + ">";
         }
 
         ~HttpServer() => Dispose(false);

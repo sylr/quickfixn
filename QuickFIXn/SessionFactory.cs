@@ -11,7 +11,7 @@ namespace QuickFix
         protected IMessageStoreFactory messageStoreFactory_;
         protected ILogFactory logFactory_;
         protected IMessageFactory messageFactory_;
-        protected Dictionary<string,DataDictionary.DataDictionary> dictionariesByPath_ = new Dictionary<string,DataDictionary.DataDictionary>();
+        protected Dictionary<string, DataDictionary.DataDictionary> dictionariesByPath_ = new Dictionary<string, DataDictionary.DataDictionary>();
 
         public SessionFactory(IApplication app, IMessageStoreFactory storeFactory)
             : this(app, storeFactory, null, null)
@@ -96,7 +96,7 @@ namespace QuickFix
                     throw new ConfigError($"{SessionSettings.HEARTBTINT} must be greater or equal to zero");
             }
             string senderDefaultApplVerId = "";
-            if(defaultApplVerID != null)
+            if (defaultApplVerID != null)
                 senderDefaultApplVerId = defaultApplVerID.Obj;
 
             Session session = new Session(
@@ -139,8 +139,8 @@ namespace QuickFix
                 session.PersistMessages = settings.GetBool(SessionSettings.PERSIST_MESSAGES);
             if (settings.Has(SessionSettings.MILLISECONDS_IN_TIMESTAMP))
                 session.MillisecondsInTimeStamp = settings.GetBool(SessionSettings.MILLISECONDS_IN_TIMESTAMP);
-            if( settings.Has( SessionSettings.TIMESTAMP_PRECISION ) )
-                session.TimeStampPrecision = settings.GetTimeStampPrecision( SessionSettings.TIMESTAMP_PRECISION );
+            if (settings.Has(SessionSettings.TIMESTAMP_PRECISION))
+                session.TimeStampPrecision = settings.GetTimeStampPrecision(SessionSettings.TIMESTAMP_PRECISION);
             if (settings.Has(SessionSettings.ENABLE_LAST_MSG_SEQ_NUM_PROCESSED))
                 session.EnableLastMsgSeqNumProcessed = settings.GetBool(SessionSettings.ENABLE_LAST_MSG_SEQ_NUM_PROCESSED);
             if (settings.Has(SessionSettings.MAX_MESSAGES_IN_RESEND_REQUEST))
@@ -189,7 +189,7 @@ namespace QuickFix
         protected void ProcessFixTDataDictionaries(SessionID sessionID, Dictionary settings, DataDictionaryProvider provider)
         {
             provider.AddTransportDataDictionary(sessionID.BeginString, createDataDictionary(sessionID, settings, SessionSettings.TRANSPORT_DATA_DICTIONARY, sessionID.BeginString));
-    
+
             foreach (KeyValuePair<string, string> setting in settings)
             {
                 if (setting.Key.StartsWith(SessionSettings.APP_DATA_DICTIONARY, System.StringComparison.CurrentCultureIgnoreCase))

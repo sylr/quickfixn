@@ -9,22 +9,22 @@ namespace QuickFix.Config
     public class Settings
     {
         #region Properties
-        public string SocketConnectHost 
+        public string SocketConnectHost
         {
             get { return _socketConnectHost; }
             set { _socketConnectHost = value; }
         }
-        public int SocketConnectPort 
+        public int SocketConnectPort
         {
             get { return _socketConnectPort; }
             set { _socketConnectPort = value; }
         }
-        public int HeartBtInt 
+        public int HeartBtInt
         {
             get { return _heartBtInt; }
             set { _heartBtInt = value; }
         }
-        public int ReconnectInterval 
+        public int ReconnectInterval
         {
             get { return _reconnectInterval; }
             set { _reconnectInterval = value; }

@@ -76,7 +76,7 @@ namespace UnitTests
         [Test]
         public void DateTimeFieldTest()
         {
-            DateTime val = new DateTime( 2009, 9, 4, 3, 44, 1 );
+            DateTime val = new DateTime(2009, 9, 4, 3, 44, 1);
             DateTime newval = new DateTime(2009, 9, 4, 3, 44, 1);
             DateTimeField field = new DateTimeField(200, val);
             Assert.That(field.Obj, Is.EqualTo(val));
@@ -86,7 +86,7 @@ namespace UnitTests
             Assert.That(field.Obj, Is.EqualTo(newval));
             Assert.That(field.ToString(), Is.EqualTo("20090904-03:44:01.000"));
         }
-        
+
         [Test]
         public void DateTimeFieldNanoTest()
         {
@@ -100,7 +100,7 @@ namespace UnitTests
             Assert.That(field.Obj, Is.EqualTo(newval));
             Assert.That(field.ToString(), Is.EqualTo("20090904-03:44:01.100310300"));
         }
-        
+
         [Test]
         public void StringFieldTest_TotalAndLength()
         {

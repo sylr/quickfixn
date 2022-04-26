@@ -34,17 +34,17 @@ namespace UnitTests
             Assert.That(dd.FieldsByTag[QuickFix.Fields.Tags.StatusValue].EnumDict.Count, Is.EqualTo(4));
         }
 
-		[Test]
-		public void LoadFieldsFromStreamTest()
-		{
-			QuickFix.DataDictionary.DataDictionary dd = new QuickFix.DataDictionary.DataDictionary();
-		    Stream stream = new FileStream(Path.Combine(TestContext.CurrentContext.TestDirectory, "spec", "fix", "FIX44.xml"), FileMode.Open, FileAccess.Read);
-			dd.Load(stream);
-			Assert.That(dd.FieldsByTag[1].Name, Is.EqualTo("Account"));
-			Assert.That(dd.FieldsByName["Account"].Tag, Is.EqualTo(1));
-			Assert.That(dd.FieldsByTag[1].EnumDict.Count, Is.EqualTo(0));
-			Assert.That(dd.FieldsByTag[QuickFix.Fields.Tags.StatusValue].EnumDict.Count, Is.EqualTo(4));
-		}
+        [Test]
+        public void LoadFieldsFromStreamTest()
+        {
+            QuickFix.DataDictionary.DataDictionary dd = new QuickFix.DataDictionary.DataDictionary();
+            Stream stream = new FileStream(Path.Combine(TestContext.CurrentContext.TestDirectory, "spec", "fix", "FIX44.xml"), FileMode.Open, FileAccess.Read);
+            dd.Load(stream);
+            Assert.That(dd.FieldsByTag[1].Name, Is.EqualTo("Account"));
+            Assert.That(dd.FieldsByName["Account"].Tag, Is.EqualTo(1));
+            Assert.That(dd.FieldsByTag[1].EnumDict.Count, Is.EqualTo(0));
+            Assert.That(dd.FieldsByTag[QuickFix.Fields.Tags.StatusValue].EnumDict.Count, Is.EqualTo(4));
+        }
 
         [Test]
         public void FieldHasValueTest()
@@ -62,7 +62,7 @@ namespace UnitTests
         {
             QuickFix.DataDictionary.DataDictionary dd = new QuickFix.DataDictionary.DataDictionary();
             dd.LoadFIXSpec("FIX44");
-            Assert.AreEqual(typeof (Dictionary<string, string>), dd.FieldsByTag[945].EnumDict.GetType());
+            Assert.AreEqual(typeof(Dictionary<string, string>), dd.FieldsByTag[945].EnumDict.GetType());
             Assert.That("COMPLETED", Is.EqualTo(dd.FieldsByTag[945].EnumDict["2"]));
             Assert.AreNotEqual("HEARTBEAT", dd.FieldsByTag[35].EnumDict["A"]);
         }
@@ -293,7 +293,7 @@ namespace UnitTests
             QuickFix.Fields.Text textField = new QuickFix.Fields.Text("woot");
             QuickFix.Fields.ClOrdID clOrdIdField = new QuickFix.Fields.ClOrdID("not woot");
 
-            Assert.DoesNotThrow(delegate() { dd.CheckIsInGroup(textField, g, "B"); });
+            Assert.DoesNotThrow(delegate () { dd.CheckIsInGroup(textField, g, "B"); });
             Assert.Throws(typeof(TagNotDefinedForMessage), delegate { dd.CheckIsInGroup(clOrdIdField, g, "B"); });
         }
 
@@ -316,7 +316,7 @@ namespace UnitTests
 
             //verify that FromString didn't correct the counter
             //HEY YOU, READ THIS NOW: if these fail, first check if MessageTests::FromString_DoNotCorrectCounter() passes
-            Assert.AreEqual("386=3", n.NoTradingSessions.toStringField());  
+            Assert.AreEqual("386=3", n.NoTradingSessions.toStringField());
             StringAssert.Contains("386=3", n.ToString());
 
             Assert.Throws<QuickFix.RepeatingGroupCountMismatch>(delegate { dd.CheckGroupCount(n.NoTradingSessions, n, "D"); });
@@ -330,7 +330,7 @@ namespace UnitTests
             QuickFix.FIX44.MessageFactory f = new QuickFix.FIX44.MessageFactory();
 
             string[] msgFields = {"8=FIX.4.4", "9=120", "35=D", "34=3", "49=sender", "52=20110909-09:09:09.999", "56=target",
-                                   "11=clordid", "55=sym", "54=1", "60=20110909-09:09:09.999", "40=1", 
+                                   "11=clordid", "55=sym", "54=1", "60=20110909-09:09:09.999", "40=1",
                                    "38=failboat", // should be a decimal
                                    "10=64"};
             string msgStr = String.Join(Message.SOH, msgFields) + Message.SOH;
@@ -350,7 +350,7 @@ namespace UnitTests
             QuickFix.DataDictionary.DataDictionary dd = new QuickFix.DataDictionary.DataDictionary();
             dd.LoadFIXSpec("FIX42");
             QuickFix.FIX42.MessageFactory f = new QuickFix.FIX42.MessageFactory();
-            
+
             string nul = Message.SOH;
             string msgStr = "8=FIX.4.2" + nul + "9=87" + nul + "35=B" + nul + "34=3" + nul + "49=CLIENT1" + nul
                 + "52=20111012-22:15:55.474" + nul + "56=EXECUTOR" + nul + "148=AAAAAAA" + nul
@@ -626,17 +626,17 @@ namespace UnitTests
 
             string[] msgFields = {"8=FIX.4.4", "9=99", "35=W", "34=3", "49=sender", "52=20110909-09:09:09.999", "56=target",
                                    "55=sym",
-                                   "268=1", "269=0", "270=123.23", "271=2", "277=A B", 
+                                   "268=1", "269=0", "270=123.23", "271=2", "277=A B",
                                    "10=213"};
-            string msgStr = String.Join( Message.SOH, msgFields ) + Message.SOH;
+            string msgStr = String.Join(Message.SOH, msgFields) + Message.SOH;
 
             string msgType = "W";
             string beginString = "FIX.4.4";
 
-            Message message = f.Create( beginString, msgType );
-            message.FromString( msgStr, true, dd, dd );
+            Message message = f.Create(beginString, msgType);
+            message.FromString(msgStr, true, dd, dd);
 
-            dd.Validate( message, beginString, msgType );
+            dd.Validate(message, beginString, msgType);
         }
 
         [Test] // Issue #66
@@ -648,15 +648,15 @@ namespace UnitTests
 
             string[] msgFields = {"8=FIX.4.4", "9=99", "35=W", "34=3", "49=sender", "52=20110909-09:09:09.999", "56=target",
                                    "55=sym",
-                                   "268=1", "269=0", "270=123.23", "271=2", "277=A 1", 
+                                   "268=1", "269=0", "270=123.23", "271=2", "277=A 1",
                                    "10=196"};
-            string msgStr = String.Join( Message.SOH, msgFields ) + Message.SOH;
+            string msgStr = String.Join(Message.SOH, msgFields) + Message.SOH;
 
             string msgType = "W";
             string beginString = "FIX.4.4";
 
-            Message message = f.Create( beginString, msgType );
-            message.FromString( msgStr, true, dd, dd );
+            Message message = f.Create(beginString, msgType);
+            message.FromString(msgStr, true, dd, dd);
 
             Assert.That(() => dd.Validate(message, beginString, msgType), Throws.TypeOf<QuickFix.IncorrectTagValue>());
         }

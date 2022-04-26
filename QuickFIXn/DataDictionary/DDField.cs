@@ -26,7 +26,7 @@ namespace QuickFix.DataDictionary
         /// <summary>
         /// Converter used only by the obsolete constructor and Enums attribute.
         /// </summary>
-        private static Dictionary<string,string> HashSetToDict(HashSet<String> enums)
+        private static Dictionary<string, string> HashSetToDict(HashSet<String> enums)
         {
             Dictionary<String, String> dict = new Dictionary<string, string>();
             foreach (String s in enums)
@@ -91,8 +91,8 @@ namespace QuickFix.DataDictionary
             bool discardedVar = false;
             return FieldTypeFromFix(type, out discardedVar);
         }
-        
-        private Type FieldTypeFromFix(String type, out bool multipleValueFieldWithEnums )
+
+        private Type FieldTypeFromFix(String type, out bool multipleValueFieldWithEnums)
         {
             multipleValueFieldWithEnums = false;
 
@@ -105,9 +105,9 @@ namespace QuickFix.DataDictionary
                 case "AMT": return typeof(Fields.DecimalField);
                 case "QTY": return typeof(Fields.DecimalField);
                 case "CURRENCY": return typeof(Fields.StringField);
-                case "MULTIPLEVALUESTRING": multipleValueFieldWithEnums = true; return typeof( Fields.StringField );
-                case "MULTIPLESTRINGVALUE": multipleValueFieldWithEnums = true; return typeof( Fields.StringField );
-                case "MULTIPLECHARVALUE": multipleValueFieldWithEnums = true; return typeof( Fields.StringField );
+                case "MULTIPLEVALUESTRING": multipleValueFieldWithEnums = true; return typeof(Fields.StringField);
+                case "MULTIPLESTRINGVALUE": multipleValueFieldWithEnums = true; return typeof(Fields.StringField);
+                case "MULTIPLECHARVALUE": multipleValueFieldWithEnums = true; return typeof(Fields.StringField);
                 case "EXCHANGE": return typeof(Fields.StringField);
                 case "UTCTIMESTAMP": return typeof(Fields.DateTimeField);
                 case "BOOLEAN": return typeof(Fields.BooleanField);
@@ -126,7 +126,7 @@ namespace QuickFix.DataDictionary
                 case "LENGTH": return typeof(Fields.IntField);
                 case "COUNTRY": return typeof(Fields.StringField);
                 case "TZTIMEONLY": return typeof(Fields.StringField);
-                case "TZTIMESTAMP": return typeof(Fields.StringField); 
+                case "TZTIMESTAMP": return typeof(Fields.StringField);
                 case "XMLDATA": return typeof(Fields.StringField);
                 case "LANGUAGE": return typeof(Fields.StringField);
 

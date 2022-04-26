@@ -12,7 +12,7 @@ namespace QuickFix
         /// </summary>
         /// <returns>List of supported begin strings</returns>
         ICollection<string> GetSupportedBeginStrings();
-        
+
         /// <summary>
         /// Creates a message for a specified type and FIX version
         /// </summary>

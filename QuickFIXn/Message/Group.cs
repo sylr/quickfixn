@@ -29,7 +29,7 @@ namespace QuickFix
         /// <param name="delim">delimiter field's tag (first field in the group)</param>
         /// <param name="fieldOrd">the group's member tags in order</param>
         public Group(int field, int delim, int[] fieldOrd)
-            :base(fieldOrd)
+            : base(fieldOrd)
         {
             Field = field;
             Delim = delim;
@@ -40,7 +40,7 @@ namespace QuickFix
         /// </summary>
         /// <param name="src">the Group to copy</param>
         public Group(Group src)
-            :base(src)
+            : base(src)
         {
             Field = src.Field;
             Delim = src.Delim;

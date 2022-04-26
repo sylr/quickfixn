@@ -7,16 +7,16 @@ namespace QuickFix.Fields
     {
         protected readonly TimeStampPrecision timePrecision = TimeStampPrecision.Millisecond;
         public DateTimeField(int tag)
-            : base(tag, new DateTime()) {}
+            : base(tag, new DateTime()) { }
 
         public DateTimeField(int tag, DateTime dt)
-            : base(tag, dt) {}
+            : base(tag, dt) { }
 
         public DateTimeField(int tag, DateTime dt, bool showMilliseconds)
-            : this(tag, dt, showMilliseconds ? TimeStampPrecision.Millisecond : TimeStampPrecision.Second ) { }
+            : this(tag, dt, showMilliseconds ? TimeStampPrecision.Millisecond : TimeStampPrecision.Second) { }
 
         public DateTimeField(int tag, DateTime dt, TimeStampPrecision timeFormatPrecision)
-            : base(tag, dt )
+            : base(tag, dt)
         {
             timePrecision = timeFormatPrecision;
         }
@@ -71,7 +71,7 @@ namespace QuickFix.Fields
 
         protected override string makeString()
         {
-            return Converters.DateTimeConverter.ConvertTimeOnly(Obj, base.timePrecision); 
+            return Converters.DateTimeConverter.ConvertTimeOnly(Obj, base.timePrecision);
         }
     }
 }

@@ -473,7 +473,7 @@ namespace QuickFix
 
             if (!IsSessionTime)
             {
-                if(IsInitiator)
+                if (IsInitiator)
                     Reset("Out of SessionTime (Session.Next())");
                 else
                     Reset("Out of SessionTime (Session.Next())", "Message received outside of session time");
@@ -840,7 +840,7 @@ namespace QuickFix
                         {
 
                             initializeResendFields(msg);
-                            if(!ResendApproved(msg, SessionID)) 
+                            if (!ResendApproved(msg, SessionID))
                             {
                                 continue;
                             }
@@ -1074,7 +1074,7 @@ namespace QuickFix
         /// <param name="logoutMessage">message to put in the Logout message's Text field (ignored if null/empty string)</param>
         public void Reset(string loggedReason, string logoutMessage)
         {
-            if(this.IsLoggedOn)
+            if (this.IsLoggedOn)
                 GenerateLogout(logoutMessage);
             Disconnect("Resetting...");
             state_.Reset(loggedReason);
@@ -1166,7 +1166,7 @@ namespace QuickFix
         {
             // If config RequiresOrigSendingTime=N, then tolerate SequenceReset messages that lack OrigSendingTime (issue #102).
             // (This field doesn't really make sense in this message, so some parties omit it, even though spec requires it.)
-            string msgType = msg.Header.GetString(Fields.Tags.MsgType); 
+            string msgType = msg.Header.GetString(Fields.Tags.MsgType);
             if (msgType == Fields.MsgType.SEQUENCE_RESET && RequiresOrigSendingTime == false)
                 return;
 
@@ -1404,7 +1404,7 @@ namespace QuickFix
         {
             return GenerateReject(msgBuilder.RejectableMessage(), reason, 0);
         }
-       
+
         internal bool GenerateReject(MessageBuilder msgBuilder, FixValues.SessionRejectReason reason, int field)
         {
             return GenerateReject(msgBuilder.RejectableMessage(), reason, field);
@@ -1549,7 +1549,7 @@ namespace QuickFix
             else
                 fix42OrAbove = this.SessionID.BeginString.CompareTo(FixValues.BeginString.FIX42) >= 0;
 
-            header.SetField(new Fields.SendingTime(System.DateTime.UtcNow, fix42OrAbove ? TimeStampPrecision : TimeStampPrecision.Second ) );
+            header.SetField(new Fields.SendingTime(System.DateTime.UtcNow, fix42OrAbove ? TimeStampPrecision : TimeStampPrecision.Second));
         }
 
         protected void Persist(Message message, string messageString)
@@ -1611,7 +1611,7 @@ namespace QuickFix
             else
                 fix42OrAbove = this.SessionID.BeginString.CompareTo(FixValues.BeginString.FIX42) >= 0;
 
-            header.SetField(new OrigSendingTime(sendingTime, fix42OrAbove ? TimeStampPrecision : TimeStampPrecision.Second ) );
+            header.SetField(new OrigSendingTime(sendingTime, fix42OrAbove ? TimeStampPrecision : TimeStampPrecision.Second));
         }
         protected void NextQueued()
         {

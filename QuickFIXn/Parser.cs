@@ -13,7 +13,7 @@ namespace QuickFix
         {
             if (buffer_.Length < usedBufferLength + bytesAdded)
                 Array.Resize(ref buffer_, (usedBufferLength + bytesAdded));
-            Buffer.BlockCopy(data, 0, buffer_, usedBufferLength , bytesAdded);
+            Buffer.BlockCopy(data, 0, buffer_, usedBufferLength, bytesAdded);
             usedBufferLength += bytesAdded;
         }
 
@@ -34,12 +34,12 @@ namespace QuickFix
         {
             msg = "";
 
-            if(buffer_.Length < 2)
+            if (buffer_.Length < 2)
                 return false;
-            
+
             int pos = 0;
             pos = IndexOf(buffer_, "8=", 0);
-            if(-1 == pos)
+            if (-1 == pos)
                 return false;
 
             buffer_ = Remove(buffer_, pos);
@@ -96,22 +96,22 @@ namespace QuickFix
                 return false;
 
             int startPos = IndexOf(buf, "\x01" + "9=", 0);
-            if(-1 == startPos)
+            if (-1 == startPos)
                 return false;
-            startPos +=3;
+            startPos += 3;
 
             int endPos = IndexOf(buf, "\x01", startPos);
-            if(-1 == endPos)
+            if (-1 == endPos)
                 return false;
 
             string strLength = Substring(buf, startPos, endPos - startPos);
             try
             {
                 length = Fields.Converters.IntConverter.Convert(strLength);
-                if(length < 0)
+                if (length < 0)
                     throw new MessageParseError("Invalid BodyLength (" + length + ")");
             }
-            catch(FieldConvertError e)
+            catch (FieldConvertError e)
             {
                 throw new MessageParseError(e.Message, e);
             }

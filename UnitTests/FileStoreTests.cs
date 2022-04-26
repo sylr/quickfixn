@@ -42,7 +42,7 @@ namespace UnitTests
 
         void rebuildStore()
         {
-            if(store != null)
+            if (store != null)
             {
                 store.Dispose();
             }
@@ -135,7 +135,7 @@ namespace UnitTests
 
             var msgs = new List<string>();
             store.Get(2, 3, msgs);
-            Assert.That(msgs,Is.Empty);
+            Assert.That(msgs, Is.Empty);
         }
 
         [Test]

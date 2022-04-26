@@ -13,7 +13,7 @@ namespace QuickFix
     public class SessionID
     {
         #region Properties
-        
+
         public string BeginString
         {
             get { return beginString_; }
@@ -90,11 +90,11 @@ namespace QuickFix
         public SessionID(string beginString, string senderCompID, string senderSubID, string senderLocationID, string targetCompID, string targetSubID, string targetLocationID, string sessionQualifier)
         {
             if (beginString == null)
-              throw new ArgumentNullException("beginString");
+                throw new ArgumentNullException("beginString");
             if (senderCompID == null)
-              throw new ArgumentNullException("senderCompID");
+                throw new ArgumentNullException("senderCompID");
             if (targetCompID == null)
-              throw new ArgumentNullException("targetCompID");
+                throw new ArgumentNullException("targetCompID");
             beginString_ = beginString;
             senderCompID_ = senderCompID;
             senderSubID_ = senderSubID;
@@ -130,7 +130,7 @@ namespace QuickFix
             : this(beginString, senderCompID, senderSubID, senderLocationID, targetCompID, targetSubID, targetLocationID, NOT_SET)
         { }
 
-        public SessionID(string beginString, string senderCompID, string targetCompID, string sessionQualifier) 
+        public SessionID(string beginString, string senderCompID, string targetCompID, string sessionQualifier)
             : this(beginString, senderCompID, NOT_SET, NOT_SET, targetCompID, NOT_SET, NOT_SET, sessionQualifier)
         { }
 
@@ -148,7 +148,7 @@ namespace QuickFix
         {
             return id_.GetHashCode();
         }
-        
+
         public override bool Equals(object obj)
         {
             if (obj == null || GetType() != obj.GetType())

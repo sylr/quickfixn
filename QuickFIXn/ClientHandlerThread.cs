@@ -56,7 +56,7 @@ namespace QuickFix
         public ClientHandlerThread(TcpClient tcpClient, long clientId, QuickFix.Dictionary settingsDict, SocketSettings socketSettings)
             : this(tcpClient, clientId, settingsDict, socketSettings, null)
         {
-            
+
         }
 
         internal ClientHandlerThread(TcpClient tcpClient, long clientId, QuickFix.Dictionary settingsDict,
@@ -90,9 +90,9 @@ namespace QuickFix
 
         public void Join()
         {
-            if(null == thread_)
+            if (null == thread_)
                 return;
-            if(thread_.IsAlive)
+            if (thread_.IsAlive)
                 thread_.Join(5000);
             thread_ = null;
         }

@@ -129,7 +129,7 @@ namespace UnitTests
 
             Session session = factory.Create(sessionID, settings);
 
-            Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Microsecond );
+            Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Microsecond);
 
             settings.SetString(SessionSettings.TIMESTAMP_PRECISION, "Micro");
 
@@ -152,7 +152,7 @@ namespace UnitTests
             settings.SetString(SessionSettings.TIMESTAMP_PRECISION, "Nano");
             session = factory.Create(sessionID, settings);
             Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Nanosecond);
-            
+
             settings.SetString(SessionSettings.TIMESTAMP_PRECISION, "Second");
             session = factory.Create(sessionID, settings);
             Assert.That(session.TimeStampPrecision == QuickFix.Fields.Converters.TimeStampPrecision.Second);

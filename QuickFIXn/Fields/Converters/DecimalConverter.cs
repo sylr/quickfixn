@@ -20,7 +20,7 @@ namespace QuickFix.Fields.Converters
         {
             try
             {
-                if((null == d) || (d.Length < 1))
+                if ((null == d) || (d.Length < 1))
                     throw new FieldConvertError("The argument string cannot be null or empty");
                 int asciiValOfFirstChar = System.Convert.ToInt32(d[0]);
                 if ((asciiValOfFirstChar < IntConverter.ASCII_ZERO) || (asciiValOfFirstChar > IntConverter.ASCII_NINE))
@@ -47,7 +47,7 @@ namespace QuickFix.Fields.Converters
         /// </summary>
         public static string Convert(Decimal d)
         {
-            return d.ToString( System.Globalization.CultureInfo.InvariantCulture );
+            return d.ToString(System.Globalization.CultureInfo.InvariantCulture);
         }
 
     }
