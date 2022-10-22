@@ -146,7 +146,7 @@ namespace QuickFix
                 { Fields.BusinessRejectReason.UNKNOWN_SECURITY, "Unknown Security" },
                 { Fields.BusinessRejectReason.UNKNOWN_MESSAGE_TYPE, "Unsupported Message Type" },
                 { Fields.BusinessRejectReason.APPLICATION_NOT_AVAILABLE, "Application Not Available" },
-                { Fields.BusinessRejectReason.CONDITIONALLY_REQUIRED_FIELD_MISSING, "Conditionally Required Field Missing" },
+                { Fields.BusinessRejectReason.CONDITIONALLY_REQUIRED_FIELD_MISSING, "Conditionally Required Field Missing: {0}" },
                 { Fields.BusinessRejectReason.NOT_AUTHORIZED, "Not authorized" },
                 { Fields.BusinessRejectReason.DELIVERTO_FIRM_NOT_AVAILABLE_AT_THIS_TIME, "DeliverTo Firm Not Available At This Time" }
             };

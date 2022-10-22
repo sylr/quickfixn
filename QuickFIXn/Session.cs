@@ -1212,6 +1212,10 @@ namespace QuickFix
             reject.SetField(new RefSeqNum(msgSeqNum));
             state_.IncrNextTargetMsgSeqNum();
 
+            if (err == Fields.BusinessRejectReason.CONDITIONALLY_REQUIRED_FIELD_MISSING)
+            {
+                reason = String.Format(reason, field);
+            }
 
             reject.SetField(new Text(reason));
             Log.OnEvent("Reject sent for Message: " + msgSeqNum + " Reason:" + reason);
