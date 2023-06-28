@@ -155,15 +155,6 @@ namespace QuickFix
 
         #endregion
 
-        /// <summary>
-        /// Don't use this.  It decides the connection is an initiator if heartBtInt=0,
-        /// which is bad because 0 is actually a valid (though not-often-used) setting.
-        /// </summary>
-        [System.Obsolete("Use the constructor that takes the isInitiator parameter.")]
-        public SessionState(ILog log, int heartBtInt)
-            : this(0 != heartBtInt, log, heartBtInt)
-        { }
-
         public SessionState(bool isInitiator, ILog log, int heartBtInt)
         {
             log_ = log;
@@ -286,7 +277,7 @@ namespace QuickFix
         {
             lock (sync_)
             {
-                MessageStore.Get(begSeqNo, endSeqNo, messages);
+              MessageStore.Get(begSeqNo, endSeqNo, messages);
             }
         }
 
@@ -369,24 +360,16 @@ namespace QuickFix
             lock (sync_) { return this.MessageStore.Set(msgSeqNum, msg); }
         }
 
-        public int GetNextSenderMsgSeqNum()
+        public int NextSenderMsgSeqNum
         {
-            lock (sync_) { return this.MessageStore.GetNextSenderMsgSeqNum(); }
+            get { lock (sync_) { return this.MessageStore.NextSenderMsgSeqNum; } }
+            set { lock (sync_) { this.MessageStore.NextSenderMsgSeqNum = value; } }
         }
 
-        public int GetNextTargetMsgSeqNum()
+        public int NextTargetMsgSeqNum
         {
-            lock (sync_) { return this.MessageStore.GetNextTargetMsgSeqNum(); }
-        }
-
-        public void SetNextSenderMsgSeqNum(int value)
-        {
-            lock (sync_) { this.MessageStore.SetNextSenderMsgSeqNum(value); }
-        }
-
-        public void SetNextTargetMsgSeqNum(int value)
-        {
-            lock (sync_) { this.MessageStore.SetNextTargetMsgSeqNum(value); }
+            get { lock (sync_) { return this.MessageStore.NextTargetMsgSeqNum; } }
+            set { lock (sync_) { this.MessageStore.NextTargetMsgSeqNum = value; } }
         }
 
         public void IncrNextSenderMsgSeqNum()
@@ -405,12 +388,6 @@ namespace QuickFix
             {
                 lock (sync_) { return this.MessageStore.CreationTime; }
             }
-        }
-
-        [Obsolete("Use Reset(reason) instead.")]
-        public void Reset()
-        {
-            this.Reset("(unspecified reason)");
         }
 
         public void Reset(string reason)
